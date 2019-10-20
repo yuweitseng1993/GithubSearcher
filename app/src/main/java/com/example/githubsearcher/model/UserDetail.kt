@@ -3,7 +3,7 @@ package com.example.githubsearcher.model
 class UserDetail (
     var login: String,
     var avatar_url: String,
-    var location: String,
+    var location: String?,
     var email: String?,
     var bio: String?,
     var public_repos: Int,

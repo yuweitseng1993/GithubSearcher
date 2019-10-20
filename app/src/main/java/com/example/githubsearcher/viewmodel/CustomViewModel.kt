@@ -1,6 +1,5 @@
 package com.example.githubsearcher.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubsearcher.model.*
@@ -12,13 +11,16 @@ import java.util.ArrayList
 
 class CustomViewModel : ViewModel() {
     private var userList: MutableList<String>? = null
-    private var userDetailList: MutableList<UserDetail> = ArrayList()
-//    private lateinit var tempUserDetail: UserDetail
+    private var userDetailList: MutableList<UserDetail>? = null
     private var userDetailData: MutableLiveData<ArrayList<UserDetail>> = MutableLiveData()
+    private var userRepoData: MutableLiveData<ArrayList<UserRepo>> = MutableLiveData()
 
     fun getUserDetail(): MutableLiveData<ArrayList<UserDetail>>? {
-//        userDetailData.value = userDetailList as ArrayList<UserDetail>
         return userDetailData
+    }
+
+    fun getUserRepo(): MutableLiveData<ArrayList<UserRepo>>? {
+        return userRepoData
     }
 
     fun loadUsers(userName: String){
@@ -37,7 +39,7 @@ class CustomViewModel : ViewModel() {
 
                 override fun onNext(t: UserResult) {
                     System.out.println("loadUsers onNext()")
-//                    System.out.println("t.items.size -> " + t.items.size)
+                    userDetailList = ArrayList()
                     generateUserList(t.items)
                 }
 
@@ -67,8 +69,6 @@ class CustomViewModel : ViewModel() {
                     System.out.println("t.login -> " + t.login)
                     userDetailList!!.add(t)
                     userDetailData!!.value = userDetailList as ArrayList<UserDetail>
-//                    setUserDetail()
-//                    tempUserDetail = t
                 }
 
                 override fun onError(e: Throwable) {
@@ -83,19 +83,32 @@ class CustomViewModel : ViewModel() {
         System.out.println("generateUserList")
         System.out.println("list.size -> " + list.size)
         userList = ArrayList()
-//        userDetailList = ArrayList()
-//        for(u in list){
-//            loadUserDetail(u.login)
-//        }
         for(x in 0..1){
             loadUserDetail(list[x].login)
         }
-//        setUserDetail()
     }
 
-    fun setUserDetail(){
-        System.out.println("setUserDetail")
-        System.out.println("userDetailList.size -> " + userDetailList!!.size)
-        userDetailData.value = userDetailList as ArrayList<UserDetail>
+    fun loadUserRepos(userName: String){
+        ApiInterface.create().getUserRepos(userName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<List<UserRepo>>{
+                override fun onComplete() {
+
+                }
+
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(t: List<UserRepo>) {
+                    userRepoData.value = t as ArrayList<UserRepo>
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+
+            })
     }
 }

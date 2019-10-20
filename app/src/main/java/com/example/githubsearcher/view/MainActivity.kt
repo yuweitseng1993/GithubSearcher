@@ -31,10 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         sv_search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-//                System.out.println("sv_search_bar.setOnQueryTextListener")
                 viewModel!!.loadUsers(query)
-//                Thread.sleep(1000)
-//                presentData()
                 return false
             }
 
@@ -44,21 +41,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-//        viewModel.getUserDetail()!!.observe(this,
-//            Observer{
-//                adapter.setData(it)
-//            })
-//        viewModel.getUserDetail()!!.observe(this, Observer {
-//            it?.let {
-//                adapter.setData(it)
-//            }})
-        viewModel?.getUserDetail()!!.observe(this, Observer {
-            it?.let {
-                adapter?.setData(it)
-            }})
-    }
-
-    fun presentData(){
         viewModel?.getUserDetail()!!.observe(this, Observer {
             it?.let {
                 adapter?.setData(it)

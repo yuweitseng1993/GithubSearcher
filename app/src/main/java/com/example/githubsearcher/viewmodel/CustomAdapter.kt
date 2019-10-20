@@ -9,6 +9,7 @@ import com.example.githubsearcher.model.UserDetail
 import com.squareup.picasso.Picasso
 import android.widget.Toast
 import android.view.View
+import com.example.githubsearcher.model.UserParcelable
 import com.example.githubsearcher.view.UserDetailActivity
 
 
@@ -34,9 +35,16 @@ class CustomAdapter(private val context: Context) : RecyclerView.Adapter<CustomV
         Picasso.get().load(tempUser.avatar_url).into(holder.ivUserAvatar)
 
         holder.cvUserCard.setOnClickListener {
-            val n = Intent(context, UserDetailActivity::class.java)
-            n.putExtra("userName", tempUser.login)
-            context.startActivity(n)
+            val intent = Intent(context, UserDetailActivity::class.java)
+            intent.putExtra("userParcelable", UserParcelable(tempUser.login,
+                                                    tempUser.avatar_url,
+                                                    tempUser.location,
+                                                    tempUser.email,
+                                                    tempUser.bio,
+                                                    tempUser.followers,
+                                                    tempUser.following,
+                                                    tempUser.created_at))
+            context.startActivity(intent)
         }
     }
 

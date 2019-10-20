@@ -4,12 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.UserDetailActivity">
+    tools:context=".view.UserDetailActivity"
+    android:padding="8dp"
+    android:background="@color/appBackground">
 
     <TextView
+        android:id="@+id/tv_app_name_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="UserDetailActivity page"/>
+        android:text="@string/tv_txt_github_searcher"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:gravity="center" />
+
+    <ImageView
+        android:id="@+id/iv_detail_avatar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name_1"
+        app:layout_constraintWidth_percent="0.3"
+        android:layout_margin="8dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/tv_detail_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name_1"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="UserName"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_username"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="Email"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_email"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="Location"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_join_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_location"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="Join Date"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_join_date"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="8 Followers"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_follower"
+        app:layout_constraintStart_toEndOf="@id/iv_detail_avatar"
+        tools:text="Following 25"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_detail_bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_following"
+        tools:text="This is their biographt. It may be long and needs to all fit"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_detail_repo_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_bio"
+        app:queryHint="Search for User's Repositories"
+        android:layout_margin="8dp"
+        app:searchIcon="@drawable/ic_search_white_24dp"
+        />
+
+    <ListView
+        android:id="@+id/lv_detail_repo_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/sv_detail_repo_search_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

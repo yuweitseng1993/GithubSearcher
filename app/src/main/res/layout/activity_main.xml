@@ -18,8 +18,7 @@
         android:text="@string/tv_txt_github_searcher"
         android:textSize="30sp"
         android:textColor="@android:color/white"
-        android:gravity="center"
-    />
+        android:gravity="center" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_search_bar"
@@ -30,7 +29,8 @@
         app:queryHint="Search for Users"
         android:iconifiedByDefault="false"
         app:iconifiedByDefault="false"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        app:searchIcon="@drawable/ic_search_white_24dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user_list"

@@ -24,7 +24,7 @@ interface ApiInterface {
 
     //https://api.github.com/users/userName/repos
     @GET("users/{username}/repos")
-    fun getUserRepos(@Path("username") userName: String) : Observable<UserRepos>
+    fun getUserRepos(@Path("username") userName: String) : Observable<List<UserRepo>>
 
     companion object {
         fun create(): ApiInterface {
