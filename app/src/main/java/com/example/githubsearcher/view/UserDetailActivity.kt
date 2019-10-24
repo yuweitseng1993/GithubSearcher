@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_user_detail.*
 class UserDetailActivity : AppCompatActivity() {
     lateinit var viewModel: CustomViewModel
     private lateinit var listView: ListView
+    private lateinit var adapter: RepoCustomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,21 +61,24 @@ class UserDetailActivity : AppCompatActivity() {
         tv_detail_following.text = "Following " + userParcelable.following.toString()
         Picasso.get().load(userParcelable.avatar_url).into(iv_detail_avatar)
 
+        viewModel!!.loadUserRepos(userParcelable.login)
+
         sv_detail_repo_search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel!!.loadUserRepos(query)
+//                adapter.getFilter().filter(query)
+//                viewModel!!.loadUserRepos(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                //    adapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText)
                 return false
             }
         })
 
         viewModel?.getUserRepo()!!.observe(this, Observer {
             it?.let {
-                val adapter = RepoCustomAdapter(this, it)
+                adapter = RepoCustomAdapter(this, it)
                 listView.adapter = adapter
             }})
 
