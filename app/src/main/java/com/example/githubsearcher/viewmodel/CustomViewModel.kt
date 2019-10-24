@@ -83,8 +83,8 @@ class CustomViewModel : ViewModel() {
         System.out.println("generateUserList")
         System.out.println("list.size -> " + list.size)
         userList = ArrayList()
-        for(x in 0..1){
-            loadUserDetail(list[x].login)
+        for(x in list){
+            loadUserDetail(x.login)
         }
     }
 
